@@ -3,6 +3,11 @@ import { Nav, NavLink, NavMenu }
 	from "./NavbarElements";
 
 const Navbar = () => {
+	let logoutAction = ()=>{
+		localStorage.clear();
+		window.location.reload();
+	}
+
 	return (
 			<Nav>
 				<NavMenu>
@@ -14,6 +19,9 @@ const Navbar = () => {
 					</NavLink>
 					<NavLink to="/about" activeStyle>
 						About
+					</NavLink>
+					<NavLink onClick={logoutAction} activeStyle>
+						Logout
 					</NavLink>
 				</NavMenu>
 			</Nav>
