@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route }
@@ -10,9 +10,20 @@ import Compose from './pages/compose';
 import Login from './pages/login';
 
 
+
 function App() {
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  
+  useEffect(()=>{
+    if(localStorage.getItem("userAuth")) setUserLoggedIn(true);
+  }, [])
+
   function checkLogin(){
+    console.log("Local storage check>>", localStorage.getItem("userAuth"));
     if(localStorage.getItem("userAuth")){
+      console.log("userLoggedIn>>", userLoggedIn);
+
       return <Home />
     }else{
       return <Login />
@@ -22,7 +33,7 @@ function App() {
   return (
     <div className="App">
         <Router>
-            <Navbar />
+        {userLoggedIn && <Navbar />}
             <Routes>
                 <Route exact path='/' element={checkLogin()} />
                 <Route path='/compose' element={<Compose />} />
