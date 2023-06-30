@@ -67,7 +67,13 @@ p{
 .white {
   color: #fff !important;
 }
-.mt{float: left;margin-top: -20px;padding-top: 20px;}
+.mt-info{
+  float: left;
+  margin-top: -20px;
+  padding-top: 20px;
+  display: flex;
+}
+
 .bg-blue-ui {
   background-color: #708198 !important;
 }
@@ -90,9 +96,10 @@ figure img{width:300px;}
 
 .item-box-blog {
   border: 1px solid #dadada;
-  text-align: center;
+  /* text-align: center; */
   padding: 20px;
-  min-height: 400px;
+  height: 530px;
+  margin-bottom: 2rem;
 }
 
 .item-box-blog-image {
@@ -130,6 +137,7 @@ figure img{width:300px;}
 
 .item-box-blog-body {
   padding: 10px;
+  overflow: hidden;
 }
 
 .item-heading-blog a h5 {
@@ -164,7 +172,7 @@ figure img{width:300px;}
 
 .btn.bg-blue-ui.white.read {
   cursor: pointer;
-  padding: 4px 90px 5px 15px;
+  /* padding: 4px 90px 5px 15px; */
   float: left;
   margin-top: 10px;
 }
@@ -259,8 +267,6 @@ button:hover{
   color: whitesmoke;
 }
 .compose-btn{
-  /* width: 100%;
-  margin: 1rem 0; */
   display: flex;
   float: right;
   box-shadow: -1px 0px 17px 3px #a114ff;

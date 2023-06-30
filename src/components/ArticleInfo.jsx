@@ -31,9 +31,9 @@ function ArticleInfo(props){
                 </div>
                 <div class="item-box-blog-body">
                 <div class="item-box-blog-heading">
-                    <a href="#">
+                    <button class="btn btn-link" onClick={viewArticle}>
                     <h5>{props.article.title}</h5>
-                    </a>
+                    </button>
                 </div>
                 <div class="item-box-blog-data" style={{padding: "px 15px"}}>
                     <p><i class="fa fa-user-o"></i> Admin, <i class="fa fa-comments-o"></i> Comments(3)</p>
@@ -41,8 +41,9 @@ function ArticleInfo(props){
                 <div class="item-box-blog-text">
                     <p>{props.article.content}</p>
                 </div>
-                <span  class="mt"> 
-                    <button onClick={viewArticle} id={props.article.id}  class="btn bg-blue-ui white read">Read More</button> 
+                <span class="mt-info"> 
+                    <button onClick={viewArticle} id={props.article.id}  class="btn btn-small bg-blue-ui white read">Read More</button> 
+                    <button onClick={viewArticle} id={props.article.id}  class="btn btn-small bg-blue-ui white read">Edit Article</button> 
                 </span>
                 </div>
             </div>
