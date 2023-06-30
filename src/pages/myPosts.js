@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import ArticleInfo from '../components/ArticleInfo';
+import NotFound from '../components/404';
 
 
-const Home = () => {
+const MyPosts = () => {
 	let [articles, setArticles] = useState([]);
 	
 	useEffect(() => {
 		async function fetchArticles(){
-			let response = await fetch(`/getArticles?id=all`);
+			let userId = localStorage.getItem("userAuth");
+			let response = await fetch(`/getArticles?id=${userId}`);
 			response = await response.json();
 			// console.log("Articles fetched>", response.articles);
 			setArticles(response.articles);
@@ -22,9 +24,7 @@ const Home = () => {
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <div class="row">
-						{articles.map(article=>(
-							<ArticleInfo key={article.id} article={article}/>
-						))}
+						{articles ? articles.map(article=><ArticleInfo article={article}/>) : <NotFound />}
                     </div>
                   </div>
                 </div>
@@ -37,4 +37,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default MyPosts;

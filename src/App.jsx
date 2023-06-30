@@ -5,9 +5,11 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
 import Home from './pages';
-import About from './pages/about';
+import MyPosts from './pages/myPosts';
+import DisplayFullArticle from './pages/displayFullArticle';
 import Compose from './pages/compose';
 import Login from './pages/login';
+import NotFound from './components/404';
 
 
 
@@ -23,7 +25,6 @@ function App() {
     console.log("Local storage check>>", localStorage.getItem("userAuth"));
     if(localStorage.getItem("userAuth")){
       console.log("userLoggedIn>>", userLoggedIn);
-
       return <Home />
     }else{
       return <Login />
@@ -36,8 +37,10 @@ function App() {
         {userLoggedIn && <Navbar />}
             <Routes>
                 <Route exact path='/' element={checkLogin()} />
+                <Route path='/myPosts' element={<MyPosts />} />
+                <Route path='/:articleId' element={<DisplayFullArticle/>} />
                 <Route path='/compose' element={<Compose />} />
-                <Route path='/about' element={<About />} />
+                <Route path='/notFound' element={<NotFound />} />
             </Routes>
         </Router>
     </div>

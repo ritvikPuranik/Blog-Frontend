@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login=()=>{
-    let navigate = useNavigate(); 
+const Login=()=>{ 
+    const navigate = useNavigate();
+
     const [credentials, setCredentials]= useState({
         email:"",
         password:""
@@ -12,6 +13,10 @@ const Login=()=>{
         email:"",
         password:""
     })
+
+    const delay = (time) => {
+        return new Promise(resolve => setTimeout(resolve, time));
+      }
 
     const modifyCredentials = (event)=>{
         let {name, value} = event.target;
@@ -32,7 +37,7 @@ const Login=()=>{
     }
 
     const registerUser = async (event)=>{
-        // event.preventDefault();
+        event.preventDefault();
         let {name, email, password} = userDetails;
         let raw = JSON.stringify({
             "name": name,
@@ -52,38 +57,36 @@ const Login=()=>{
             if(signup.status === 201){
                 console.log("Signup Successful");
                 let signupJson = await signup.json();
-                console.log("signupJson>>", signupJson);
+                // delay(1000);
                 localStorage.setItem("userAuth", signupJson.ID);
+                window.location.href='/';
             }else{
                 console.log("Signup Failure");
                 localStorage.clear();
             }
-
-            let path = `/`; 
-            navigate(path);
         }catch(err){
             console.log("Signup failure>", err);
         }
     }
 
     const authorizeUser = async (event)=>{
-        // event.preventDefault();
+        event.preventDefault();
         try{
             let login = await fetch(`/login?email=${credentials.email}&password=${credentials.password}`);
             console.log("response status>>", login.status);
             if(login.status === 200){
                 console.log("Login Successful");
-                let loginJson = await login.json()
+                let loginJson = await login.json();
+                console.log("loginJson.ID", loginJson.ID);
                 localStorage.setItem("userAuth", loginJson.ID);
+                console.log("navigating");
+                window.location.href='/';
             }else{
                 console.log("Login Failure");
                 //clear all local storage
                 localStorage.clear();
             }
-            // console.log("All Articles>", articleSubmit);
 
-            let path = `/`; 
-            navigate(path);
         }catch(err){
             console.log("Login failure>", err);
         }
@@ -95,7 +98,7 @@ const Login=()=>{
 
 			<div class="signup">
 				<form onSubmit={registerUser}>
-					<label for="chk" aria-hidden="true">Sign up</label>
+					<label htmlFor="chk" aria-hidden="true">Sign up</label>
 					<input type="text" onChange={modifyUserDetails} class="login-input" name="name" placeholder="User name" value={userDetails.name} required />
 					<input type="email" onChange={modifyUserDetails} class="login-input" name="email" placeholder="Email" value={userDetails.email} required />
 					<input type="password" onChange={modifyUserDetails} class="login-input" name="password" placeholder="Set Password" value={userDetails.password} required />
@@ -105,7 +108,7 @@ const Login=()=>{
 
 			<div class="login">
 				<form onSubmit={authorizeUser}>
-					<label for="chk" aria-hidden="true">Login</label>
+					<label htmlFor="chk" aria-hidden="true">Login</label>
 					<input type="email" onChange={modifyCredentials} class="login-input" name="email" placeholder="Email" value={credentials.email} required />
 					<input type="password" onChange={modifyCredentials} class="login-input" name="password" placeholder="Password" value={credentials.password} required />
 					<button>Login</button>

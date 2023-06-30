@@ -1,9 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+const fetch = require('cross-fetch');
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 function ArticleInfo(props){
+    let navigate = useNavigate();
     let articleMeta = JSON.parse(props.article.meta);
-    function createdAt(dateOfPublish){
+    let createdAt = function (dateOfPublish){
         let date = new Date(dateOfPublish);
         const year = date.getFullYear();
         const month = date.getMonth();
@@ -12,6 +15,13 @@ function ArticleInfo(props){
         // console.log(`Date: ${months[month]}, ${day}`);
         return dateString;
     }
+
+    let viewArticle = async function(event){
+        let articleId = event.target.id;
+        let path = `/${articleId}`; 
+        navigate(path);
+    }
+
     // console.log("props>", props.article);
     return(<div class="col-md-4" >
             <div class="item-box-blog">
@@ -21,7 +31,7 @@ function ArticleInfo(props){
                 </div>
                 <div class="item-box-blog-body">
                 <div class="item-box-blog-heading">
-                    <a href="#" tabindex="0">
+                    <a href="#">
                     <h5>{props.article.title}</h5>
                     </a>
                 </div>
@@ -31,7 +41,9 @@ function ArticleInfo(props){
                 <div class="item-box-blog-text">
                     <p>{props.article.content}</p>
                 </div>
-                <div class="mt"> <a href="#" tabindex="0" class="btn bg-blue-ui white read">Read More</a> </div>
+                <span  class="mt"> 
+                    <button onClick={viewArticle} id={props.article.id}  class="btn bg-blue-ui white read">Read More</button> 
+                </span>
                 </div>
             </div>
             </div>)

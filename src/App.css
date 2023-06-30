@@ -1,12 +1,15 @@
 h1, h3{
-  padding: 15px 50px;
+  padding: 35px 0px;
+  margin-top: 70px;
+  color: white;
 }
 
 body{
   /* padding: 0px 50px; */
   margin: 0;
 	padding: 0;
-	display: flex;
+	/* display: flex; */
+	display: grid;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
@@ -26,6 +29,7 @@ footer{
 p{
   line-height: 1rem;
   word-wrap: break-word;
+  color: white;
 }
 
 .inline{
@@ -44,6 +48,7 @@ p{
 }
 
 .subheading{
+  margin-top: 1.5rem;
   font-size: 2rem;
   font-weight: 600;
 }
@@ -159,7 +164,7 @@ figure img{width:300px;}
 
 .btn.bg-blue-ui.white.read {
   cursor: pointer;
-  padding: 4px 20px;
+  padding: 4px 90px 5px 15px;
   float: left;
   margin-top: 10px;
 }
@@ -249,4 +254,25 @@ button:hover{
 }
 .login-input{
   height: 35px;
+}
+.off-white{
+  color: whitesmoke;
+}
+.compose-btn{
+  /* width: 100%;
+  margin: 1rem 0; */
+  display: flex;
+  float: right;
+  box-shadow: -1px 0px 17px 3px #a114ff;
+}
+.custom-navbar{
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: center !important;
+}
+
+.compose-enclosure{
+  margin: 3rem;
 }

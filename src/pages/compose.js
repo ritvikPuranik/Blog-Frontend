@@ -21,12 +21,14 @@ function ArticleCompose(){
     
 
     async function submitArticle(event){
+        // event.preventDefault();
+        let userId = localStorage.getItem("userAuth");
         let raw = JSON.stringify({
             "title": article.title,
             "content": article.content,
-            "imgUrl":article.imgUrl
+            "imgUrl":article.imgUrl,
+            "userId": userId
         });
-        event.preventDefault();
         let requestOptions = {
             method: 'POST',
             headers:{"Content-Type": "application/json"},
@@ -45,25 +47,25 @@ function ArticleCompose(){
         }
     }
 
-    return( <div>
+    return( <div class="compose-enclosure">
                 <div class="page-title">
                 <h1>Compose</h1>
                 </div>
                 <form  onSubmit={submitArticle}>
                     <div class="mb-3">
                     <label class="form-label subheading">Title</label>
-                    <input onChange={articleChange} class="form-control bg-grey" name="title" value={article.title} />
-                    <div class="form-text">Please restrict to 20 words</div>
+                    <input onChange={articleChange} class="form-control bg-grey" name="title" value={article.title} required/>
+                    <div class="form-text off-white">Please restrict to 20 words</div>
                     </div>
                     <div class="mb-3">
                     <label class="form-label subheading">Content</label>
-                    <textarea onChange={articleChange} class="form-control bg-grey" name="content" value={article.content} cols="30" rows="10"></textarea>
+                    <textarea onChange={articleChange} class="form-control bg-grey" name="content" value={article.content} cols="30" rows="10" required></textarea>
                     </div>
                     <div class="mb-3">
                     <label class="form-label subheading">Image URL</label>
                     <input onChange={articleChange} class="form-control bg-grey" name="imgUrl" value={article.imgUrl} />
                     </div>
-                    <button type="submit" class="btn btn-secondary btn-lg">Compose</button>
+                    <button type="submit" class="btn btn-success mb-5 btn-lg compose-btn">Compose</button>
                 </form>
             </div>);
   }
